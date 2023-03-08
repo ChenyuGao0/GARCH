@@ -7,10 +7,6 @@ Yn = Yn100(:,k0);
 Vn = Vn100(:,k0);
 n_max = max(n1,n2); n = length(Yn) - n_max;
 paras = struct;
-EstMdl = estimate(garch(n2,n1),Yn);
-o_m = EstMdl.Constant;
-a_m = cell2mat(EstMdl.ARCH);
-b_m = cell2mat(EstMdl.GARCH);
 rng(k0+429+3)
 paras.omega_ini = var(Yn)*0.1;
 paras.alpha_ini = rand(n1,1);
@@ -74,7 +70,7 @@ while(t<30000)
     b_t = paras.beta0;
     o_t = abs(paras.omega0);
 
-     paras.mu1 = 7e5; %hyperparameter
+     paras.mu1 = 1e5; %hyperparameter
 
     paras = SQUAREM2(paras);
     t = t + 1;
